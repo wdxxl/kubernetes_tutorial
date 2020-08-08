@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wdxxl-node
+  template:
+    metadata:
+      labels:
+        app: wdxxl-node
+    spec:
+      containers:
+        - name: hello-world
+          image: wdxxl/hello-world
