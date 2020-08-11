@@ -20,6 +20,7 @@ docker run -d --name=openresty -p 8080:80 wdxxl/openresty
 
 curl 127.0.0.1:8080
 curl 127.0.0.1:8080/lua
+curl 127.0.0.1:8080/README.md
 
 docker stop openresty && docker rm openresty
 ```
