@@ -1,0 +1,12 @@
+2020/08/11 03:32:13 [notice] 1#1: using the "epoll" event method
+2020/08/11 03:32:13 [notice] 1#1: openresty/1.9.15.1
+2020/08/11 03:32:13 [notice] 1#1: built by gcc 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3) 
+2020/08/11 03:32:13 [notice] 1#1: OS: Linux 4.19.76-linuxkit
+2020/08/11 03:32:13 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2020/08/11 03:32:13 [notice] 1#1: start worker processes
+2020/08/11 03:32:13 [notice] 1#1: start worker process 6
+2020/08/11 03:33:20 [notice] 1#1: signal 15 (SIGTERM) received, exiting
+2020/08/11 03:33:20 [notice] 6#6: exiting
+2020/08/11 03:33:20 [notice] 1#1: signal 17 (SIGCHLD) received
+2020/08/11 03:33:20 [notice] 1#1: worker process 6 exited with code 0
+2020/08/11 03:33:20 [notice] 1#1: exit
