@@ -1,0 +1,1 @@
+ngx.say('hello ngx_lua!!!!');

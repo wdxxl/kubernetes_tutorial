@@ -1,5 +1,5 @@
 
-OpenResty hello-world 例子
+#### OpenResty hello-world 例子
 
 ```
 docker pull openresty/openresty:1.9.15.1-trusty
@@ -12,7 +12,19 @@ curl 127.0.0.1:8080
 docker stop openresty && docker rm openresty
 ```
 
-AB结果查看
+#### Dockerfile - 包含lua代码 - 灵活一些
+
+```
+docker build -t wdxxl/openresty .
+docker run -d --name=openresty -p 8080:80 wdxxl/openresty 
+
+curl 127.0.0.1:8080
+curl 127.0.0.1:8080/lua
+
+docker stop openresty && docker rm openresty
+```
+
+#### AB结果查看 
 ```
 wangkexuedeMacBook-Pro:01_OpenResty wangkexue$ ab -c10 -n50000 http://localhost:8080/
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
