@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+      target: build
+    volumes:
+      - ./:/go/app
+    command: go run main.go
+    ports:
+      - 1323:1323
