@@ -1,0 +1,17 @@
+version: '3.5'
+
+networks:
+  back-tier:
+
+services:
+  app:
+    build:
+      context: .
+      target: build
+    volumes:
+      - ./:/go/app
+    command: go run main.go
+    ports:
+      - 28181:28181
+    networks:
+      - back-tier

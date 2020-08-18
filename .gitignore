@@ -6,3 +6,10 @@ Docker/02_Go/vendor/
 ## ignore docker sonar example related generated files
 **/.scannerwork/
 **/reports/
+
+## for Prometheus & Grafana
+**/05_Grafana_Prometheus/go_sample/vendor/
+**/05_Grafana_Prometheus/prometheus-server/grafana/plugins/
+**/05_Grafana_Prometheus/prometheus-server/grafana/sessions/
+**/05_Grafana_Prometheus/prometheus-server/grafana/grafana.db
+
