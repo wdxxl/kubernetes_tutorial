@@ -1,3 +1,8 @@
 .idea/
 .DS_Store
+
 Docker/02_Go/vendor/
+
+## ignore docker sonar example related generated files
+**/.scannerwork/
+**/reports/
