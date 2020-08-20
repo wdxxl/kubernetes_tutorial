@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  gitlab-web:
+    image: gitlab/gitlab-ce:latest
+    restart: always
+    container_name: gitlab
+    environment:
+      TZ: 'Asia|Shanghai'
+    ports:
+      - '10022:22'
+      - '10080:80'
+      - '10443:443'
+    volumes:
+      - /Users/wdxxl/tmp/gitlab/gitlab_config:/etc/gitlab
+      - /Users/wdxxl/tmp/gitlab/gitlab_logs:/var/log/gitlab
+      - /Users/wdxxl/tmp/gitlab/gitlab_data:/var/opt/gitlab
+    networks:
+      - gitlab-network
+
+  gitlab-runner1:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner1
+    hostname: gitlab-runner1
+    volumes:
+      - './gitlab_runner1_config:/etc/gitlab-runner'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - gitlab-network
+
+networks:
+  gitlab-network:
+    name: gitlab-network
