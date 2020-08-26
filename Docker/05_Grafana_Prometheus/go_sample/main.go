@@ -5,6 +5,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -74,7 +75,9 @@ func DealAPI2(c *gin.Context) {
 
 func main() {
 	router := gin.Default()
+	pprof.Register(router, "/debug/pprof")
 	g := router.Group("/api")
+
 	g.Use(Metric())
 
 	g.GET("api1", DealAPI1)

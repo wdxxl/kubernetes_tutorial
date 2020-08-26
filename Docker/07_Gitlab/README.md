@@ -2,7 +2,7 @@ https://juejin.im/post/6844903998487527432
 
 ```
 rm -rf /Users/wdxxl/tmp/gitlab
-mkdir /Users/wdxxl/tmp/gitlab
+mkdir -p /Users/wdxxl/tmp/gitlab
 
 docker-compose up
 ```

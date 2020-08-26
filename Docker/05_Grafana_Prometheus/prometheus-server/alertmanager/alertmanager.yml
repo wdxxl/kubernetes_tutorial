@@ -1,0 +1,28 @@
+global:
+  resolve_timeout: 5m
+  smtp_from: 'wangkexue@meican.com'
+  smtp_smarthost: 'smtp.exmail.qq.com:465'
+  smtp_auth_username: 'wangkexue@meican.com'
+  smtp_auth_password: '<CHANGE_ME>'
+  smtp_require_tls: false
+
+route:
+  group_by: ['alertname']
+  group_wait: 5s
+  group_interval: 5s
+  repeat_interval: 5m
+  receiver: email_slack # A default receiver
+  routes:
+    - match:
+        serverity: page
+      receiver: email_slack
+
+receivers:
+- name: email_slack
+  email_configs:
+    - to: 'wangkexue@meican.com'
+      send_resolved: true
+  slack_configs:
+    - api_url: 'https://hooks.slack.com/services/<CHANGE_ME>'
+      channel: '#prometheus-alert'
+      send_resolved: true

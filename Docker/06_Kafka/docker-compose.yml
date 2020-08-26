@@ -1,0 +1,20 @@
+version: '3'
+<!-- docker-compose的兼容版本，可以按实际的docker的大版本号配置 -->
+services:
+<!-- 定义ZK层服务 -->
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+<!-- 定义Kafka层 -->
+  kafka:
+    image: wurstmeister/kafka
+    depends_on: [zookeeper]
+    ports:
+      - "9092:9092"
+    enviroment:
+      KAFKA_ADVERTISED_HOST_NAME: 47.106.143.76
+      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

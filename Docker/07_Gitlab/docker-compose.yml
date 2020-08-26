@@ -28,6 +28,16 @@ services:
     networks:
       - gitlab-network
 
+  gitlab-runner2:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner2
+    hostname: gitlab-runner2
+    volumes:
+      - './gitlab_runner2_config:/etc/gitlab-runner'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - gitlab-network
+
 networks:
   gitlab-network:
     name: gitlab-network

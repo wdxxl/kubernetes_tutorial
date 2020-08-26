@@ -40,3 +40,15 @@ services:
     env_file:
       - ./grafana/config.monitoring
     restart: always
+
+  alertmanager:
+    image: prom/alertmanager:v0.20.0
+    depends_on:
+      - prometheus
+    ports:
+      - 9093:9093
+    networks:
+      - back-tier
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    restart: always

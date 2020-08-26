@@ -5,7 +5,7 @@ check_interval = 0
   session_timeout = 1800
 
 [[runners]]
-  name = "docker-stable_runner1"
+  name = "docker-stable_runner2"
   url = "http://gitlab"
   token = "c9_jNRsh4szuJesam-sH"
   executor = "shell"
