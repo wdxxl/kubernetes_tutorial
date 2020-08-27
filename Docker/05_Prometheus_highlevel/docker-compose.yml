@@ -1,0 +1,63 @@
+version: "3"
+
+networks:
+  public: {}
+
+volumes:
+  grafana_lib: {}
+  prometheus_data: {}
+  prometheus_config:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.19.0
+    ports:
+      - 9090:9090
+    networks:
+      - public
+    volumes:
+      - prometheus_data:/prometheus
+      - prometheus_config:/fragments/
+      - ${PWD}/prometheus-server2/config/targets/prometheus.json:/etc/prometheus/targets/prometheus.json
+      - ${PWD}/prometheus-server2/config/targets/grafana.json:/etc/prometheus/targets/grafana.json
+      - ${PWD}/node-exporter/node-exporter.json:/etc/prometheus/targets/node-exporter.json
+    command:
+      - '--config.file=/fragments/complete/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+
+  grafana:
+    image: grafana/grafana:7.0.3
+    ports:
+      - "3000:3000"
+    networks:
+      - public
+    volumes:
+      - grafana_lib:/var/lib/grafana
+      - ${PWD}/prometheus-server2/config/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+
+  config-concat:
+    image: deanwilson/promconf-concat:0.1.0
+    volumes:
+      - prometheus_config:/fragments/
+      - ${PWD}/prometheus-server2/config/base_prometheus.yml:/base_prometheus.yml
+
+  node-exporter:
+    image: prom/node-exporter:v0.18.1
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    ports:
+      - 9100:9100
+    networks:
+      - public
